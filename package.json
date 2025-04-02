@@ -1,0 +1,18 @@
+{
+  "name": "notetools",
+  "version": "1.0.0",
+  "description": "site para anotar coisas",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^2.2.0",
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "netlify-cli": "^19.1.5",
+    "nodemon": "^3.1.9"
+  }
+}

@@ -3,6 +3,10 @@
     padding: 0;
 }
 
+a {
+    cursor: pointer;
+}
+
 body {
     background-color: #002030;
 }
@@ -44,4 +48,38 @@ h1 a {
     display: inline-block;
     list-style: none;
     padding-right: 10px;
+}
+
+.btns {
+    display: flex;
+    gap: 20px;
+    padding: 50px 0px 0px 50px;
+}
+
+.new {
+    border: 2px solid #ffffff;
+    padding: 10px 10px 10px 10px;
+    color: #ffffff;
+    text-decoration: none;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 20px;
+}
+
+.notes {
+    border: 2px solid #002030;
+    padding: 10px 10px 10px 10px;
+    color: #00ffff;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 20px;
+    text-underline-offset: 8px;
+}
+
+.last {
+    padding: 50px 50px 50px 50px;
+}
+
+h2 {
+    color: #ffffff;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 25px;
 }
