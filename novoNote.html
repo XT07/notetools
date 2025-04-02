@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../public/css/style.css">
+    <title>NoteTools</title>
+</head>
+<body>
+    <nav class="menuBox">
+        <div class="title">
+            <h1><a>Note<span class="part2">Tools</span></a></h1>
+        </div>
+        <div class="menu">
+            <ul class="menuContent">
+                <li class="menuItem"><a href="index.html"><strong><b>HOME</b></strong></a></li>
+                <li class="menuItem"><a href="biblioteca.html"><strong><b>ANOTAÇÕES</b></strong></a></li>
+                <li class="menuItem"><a href="developer.html"><strong><b>DESENVOLVEDOR</b></strong></a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="create">
+        <div class="newNotes">
+            <h2>Criar nova anotação</h2><br>
+            <label>Nome do tema (max 50 carcteres): </label><br>
+            <input type="text" id="tema" placeholder="Ex: matemática" maxlength="50" class="textNotes"><br><br>
+            <label>Vincular a um tema existente:</label><br><br>
+            <label><input type="radio" name="temaAdd" value="sim">Sim </label>
+            <label><input type="radio" name="temaAdd" value="nao">Não</label><br><br>
+            <label>Nome da anotação (max 50 carcteres):</label><br>
+            <input type="text" id="nameNote" placeholder="Ex: baskara" maxlength="50" class="textNotes"><br><br>
+            <label>Anotação:</label><br><br>
+            <textarea id="note"></textarea><br><br>
+            <button onclick="createNote()" class="save">Salvar</button>
+        </div>
+    </div>
+    <script src="../scripts/ciente.js"></script>
+    <script src="../scripts/script.js"></script>
+</body>
+</html>

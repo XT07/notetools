@@ -13,18 +13,21 @@
         </div>
         <div class="menu">
             <ul class="menuContent">
-                <li class="menuItem"><a><strong><b>HOME</b></strong></a></li>
-                <li class="menuItem"><a><strong><b>ANOTAÇÕES</b></strong></a></li>
-                <li class="menuItem"><a><strong><b>DESENVOLVEDOR</b></strong></a></li>
+                <li class="menuItem"><a href="index.html"><strong><b>HOME</b></strong></a></li>
+                <li class="menuItem"><a href="biblioteca.html"><strong><b>ANOTAÇÕES</b></strong></a></li>
+                <li class="menuItem"><a href="developer.html"><strong><b>DESENVOLVEDOR</b></strong></a></li>
             </ul>
         </div>
     </nav>
     <div class="btns">
-        <a href="./views/novoNote.html" class="new">Cria nova anotação</a>
-        <a href="./views/biblioteca.html" class="notes">Ver anotações</a>
+        <a href="novoNote.html" class="new">Cria nova anotação</a>
+        <a href="biblioteca.html" class="notes">Ver anotações</a>
     </div>
     <div class="last">
-        <h2>Ultima anotação</h2>
+        <h2>Ultima anotação | <button onclick="lastNote()"><strong>ver</strong></button></h2>
+        <div id="lastNotes">
+
+        </div>
     </div>
     <script src="../scripts/ciente.js"></script>
     <script src="../scripts/script.js"></script>

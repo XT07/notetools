@@ -5,10 +5,14 @@
 
 a {
     cursor: pointer;
+    color: #ffffff;
+    text-decoration: none;
 }
 
 body {
     background-color: #002030;
+    color: #ffffff;
+    overflow: hidden;
 }
 
 .title {
@@ -72,14 +76,83 @@ h1 a {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: 20px;
     text-underline-offset: 8px;
+    text-decoration: underline;
 }
 
 .last {
     padding: 50px 50px 50px 50px;
 }
 
+.create {
+    padding: 50px 50px 50px 50px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.newNotes {
+    border: 2px solid #ffffff;
+    border-radius: 15px;
+    padding: 20px 20px 20px 20px;
+    width: 50%;
+}
+
+form h2 {
+    text-align: center;
+}
+
+label {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+}
+
+.textNotes {
+    width: 100%;
+    height: 40px;
+    background: none;
+    border: none;
+    border-bottom: 2px solid #ffffff;
+    color: #ffffff;
+    outline: none;
+}
+
+.textNotes::placeholder {
+    color: #ffffff;
+}
+
 h2 {
     color: #ffffff;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: 25px;
+}
+
+.save {
+    padding: 5px 5px 5px 5px;
+    border: 2px solid #ffffff;
+    border-radius: 15px;
+    color: #ffffff;
+    width: 200px;
+    background: none;
+    cursor: pointer;
+}
+
+textarea {
+    width: 840px;
+    padding: 20px 20px 20px 20px;
+    height: 300px;
+    outline: none;
+    border: 2px solid #ffffff;
+    border-radius: 15px;
+    color: #ffffff;
+    background: none;
+    resize: vertical;
+}
+
+button {
+    color: #ffffff;
+    background: none;
+    border: none;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 25px;
+    cursor: pointer;
 }
