@@ -1,0 +1,47 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #002030;
+}
+
+.title {
+    position: absolute;
+    width: 150px;
+    z-index: 99;
+    margin-left: 10px;
+}
+
+h1 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 25px;
+}
+
+h1 a {
+    cursor: pointer;
+}
+
+.part2 {
+    color: #00ffff;
+}
+
+.menuBox {
+    background-color: #001020;
+    color: #ffffff;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    padding: 20px 10px 20px 10px;
+    font-size: 20px;
+}
+
+.menu {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.menuItem {
+    display: inline-block;
+    list-style: none;
+    padding-right: 10px;
+}
