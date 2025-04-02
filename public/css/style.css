@@ -12,7 +12,6 @@ a {
 body {
     background-color: #002030;
     color: #ffffff;
-    overflow: hidden;
 }
 
 .title {
@@ -137,7 +136,7 @@ h2 {
 }
 
 textarea {
-    width: 840px;
+    width: 95%;
     padding: 20px 20px 20px 20px;
     height: 300px;
     outline: none;
@@ -155,4 +154,11 @@ button {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 25px;
     cursor: pointer;
+}
+
+.rowTitle {
+    margin: 20px 0px 20px 0px;
+    border: 2px solid #ffffff;
+    padding: 20px 20px 20px 20px;
+    font-size: 25px;
 }

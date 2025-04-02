@@ -14,10 +14,21 @@ class Notes {
 let noteList = [];
 let notes;
 
-function createNote(){
+window.onload = () => {
     let storedNotes = JSON.parse(localStorage.getItem("notes")) || [];
     noteList = storedNotes.map(item => new Notes(item.tema, item.name, item.note));
+    let row = document.getElementById("nomeTema");
 
+    noteList.forEach(note => {
+        let h2 = document.createElement("h2");
+        h2.classList.add("rowTitle");
+        row.appendChild(h2);
+
+        h2.innerHTML = note.tema;
+    })
+}
+
+function createNote(){
     let tema = document.getElementById("tema").value;
     let vinc = document.getElementsByName("temaAdd")[0].value;
     let nameNote = document.getElementById("nameNote").value;
