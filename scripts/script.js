@@ -26,6 +26,10 @@ window.onload = () => {
 
         h2.innerHTML = note.tema;
     })
+
+    let lastLast = new Notes(storedNotes[storedNotes -1].tema, storedNotes[storedNotes -1].name, storedNotes[storedNotes -1].note)
+    let lastNotes = document.getElementById("lastNotes");
+    lastNotes.innerHTML = lastLast.getNote();
 }
 
 function createNote(){
@@ -40,10 +44,3 @@ function createNote(){
     alert("Anotação salva com sucesso");
     localStorage.setItem("notes", JSON.stringify(noteList));
 };
-
-function lastNote(){
-    let list = JSON.parse(localStorage.getItem("notes")) || [];
-    let lastNote = new Notes(list[list.length - 1].tema, list[list.length - 1].name, list[list.length - 1].note);
-    let lastNotes = document.getElementById("lastNotes");
-    lastNotes.innerHTML = lastNote.getNote();
-}
