@@ -14,18 +14,22 @@
         <div class="menu">
             <ul class="menuContent">
                 <li class="menuItem"><a href="index.html"><strong><b>HOME</b></strong></a></li>
-                <li class="menuItem"><a href="biblioteca.html"><strong><b>ANOTAÇÕES</b></strong></a></li>
                 <li class="menuItem"><a href="developer.html"><strong><b>DESENVOLVEDOR</b></strong></a></li>
             </ul>
         </div>
     </nav>
     <div class="btns">
         <a href="novoNote.html" class="new">Cria nova anotação</a>
-        <a href="biblioteca.html" class="notes">Ver anotações</a>
+        <a href="index.html" class="notes">Ver anotações</a>
     </div>
     <div class="last">
-        <h2>Ultima anotação</h2>
-        <div id="lastNotes"></div>
+        <h2>Anotaçõe</h2>
+        <label for="filter">Selecione um tema</label>
+        <select id="filter">
+            <option name="filterOption"></option>
+        </select>
+        <button onclick="filterNotes()" class="btnFilter">Filtrar</button>
+        <div id="nomeTema"></div>
     </div>
     <script src="../scripts/ciente.js"></script>
     <script src="../scripts/script.js"></script>
