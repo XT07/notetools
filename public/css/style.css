@@ -203,7 +203,28 @@ textarea {
     transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
 }
 
+.verTema a {
+    transition: background-color 0.3s ease-in-out, 0.3s ease-in-out;
+}
+
 .verTema:hover {
     background-color: #ffffff;
     color: #001020;
+}
+
+.verTema:hover, .verTema:hover a {
+    color: #001020;
+}
+
+.naemNotes {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 25px;
+}
+
+pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    color: #ffffff;
+    font-size: 25px;
+    font-family: Arial, Helvetica, sans-serif;
 }

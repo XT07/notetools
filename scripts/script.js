@@ -23,12 +23,19 @@ window.onload = () => {
         let h2 = document.createElement("h2");
         let div = document.createElement("div");
         let btn = document.createElement("button");
+        let form = document.createElement("form");
+        let inputId = document.createElement("input");
+        form.setAttribute("onsubmit", "getNote(event, this)");
+        inputId.setAttribute("type", "hidden");
+        inputId.value = note.tema;
         div.classList.add("rowTitle");
         btn.classList.add("verTema");
         btn.innerHTML = "Ver anotações";
         row.appendChild(div);
         div.appendChild(h2);
-        div.appendChild(btn);
+        div.appendChild(form);
+        form.appendChild(btn);
+        form.appendChild(inputId);
 
         h2.innerHTML = note.tema;
     })
@@ -45,7 +52,6 @@ window.onload = () => {
 
 function createNote(){
     let tema = document.getElementById("tema").value;
-    let vinc = document.getElementsByName("temaAdd").checked;
     let nameNote = document.getElementById("nameNote").value;
     let note = document.getElementById("note").value;
 
@@ -77,4 +83,11 @@ function filterNotes() {
 
         h2.innerHTML = note.tema;
     });
+}
+
+function getNote(event, form){
+    event.preventDefault();
+    let tema = form.querySelector("input").value;
+    localStorage.setItem("temp", tema);
+    window.location.href = "note.html";
 }
