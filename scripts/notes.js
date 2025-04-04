@@ -1,3 +1,5 @@
+import { Notes } from "./NotesClass.js";
+
 window.onload = () => {
     let noteList = [];
     let storedNotes = JSON.parse(localStorage.getItem("notes"));

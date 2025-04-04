@@ -1,18 +1,6 @@
-class Notes {
-
-    constructor(tema, nome, note){
-        this.tema = tema,
-        this.name = nome,
-        this.note = note
-    }
-
-    getNote(){
-        return `Tema: ${this.tema}<br>Nome: ${this.name}<br>Anotação: ${this.note}`;
-    }
-}
+import { Notes } from "./NotesClass.js";
 
 let noteList = [];
-let notes;
 
 window.onload = () => {
     let storedNotes = JSON.parse(localStorage.getItem("notes")) || [];
@@ -47,20 +35,14 @@ window.onload = () => {
         option.value = note.tema;
         option.innerHTML = note.tema;
     })
-    
 }
 
-function createNote(){
-    let tema = document.getElementById("tema").value;
-    let nameNote = document.getElementById("nameNote").value;
-    let note = document.getElementById("note").value;
-
-    notes = new Notes(tema, nameNote, note);
-    noteList.push(notes);
-
-    alert("Anotação salva com sucesso");
-    localStorage.setItem("notes", JSON.stringify(noteList));
-};
+function getNote(event, form){
+    event.preventDefault();
+    let tema = form.querySelector("input").value;
+    localStorage.setItem("temp", tema);
+    window.location.href = "note.html";
+}
 
 function filterNotes() {
     let tema = document.getElementById("filter").value;
@@ -83,11 +65,4 @@ function filterNotes() {
 
         h2.innerHTML = note.tema;
     });
-}
-
-function getNote(event, form){
-    event.preventDefault();
-    let tema = form.querySelector("input").value;
-    localStorage.setItem("temp", tema);
-    window.location.href = "note.html";
 }
