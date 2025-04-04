@@ -66,3 +66,6 @@ function filterNotes() {
         h2.innerHTML = note.tema;
     });
 }
+
+window.getNote = getNote;
+window.filterNotes = filterNotes; 
