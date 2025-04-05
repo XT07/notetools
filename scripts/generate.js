@@ -8,7 +8,7 @@ async function createNote(){
 
     try {
         const temaVerif = collection(db, "temas");
-        const temaQuery = query(temaVerif, where("Nome", "==", tema));
+        const temaQuery = query(temaVerif, where("Nome", "==", tema.toUpperCase()));
         const temaVerified = await getDocs(temaQuery);
 
         let tempTema =  tema.toUpperCase();

@@ -22,13 +22,23 @@ async function getData(){
             let anotation = document.createElement("h2");
             let note = document.createElement("p");
             let notesLast = document.getElementById("notesLast");
+            let divForm = document.createElement("div");
+            let btn = document.createElement("button");
+            let btnDel = document.createElement("button");
             nameNote.classList.add("nameNotes");
             anotation.classList.add("nameNotes");
+            divForm.classList.add("divForm");
+            btn.classList.add("btnEdit");
             div.setAttribute("id", "divTema");
+            divForm.setAttribute("onsubmit", "editNote(event, this)");
             notesLast.appendChild(div);
             div.appendChild(nameNote);
             div.appendChild(anotation);
             div.appendChild(note);
+            div.appendChild(divForm);
+            divForm.appendChild(btn);
+            divForm.appendChild(btnDel);
+            btn.innerHTML = "Editar";
             nameNote.innerHTML = `Nome da anotação: ${data.Nome}`;
             anotation.innerHTML = `<br>Anotação:`;
             note.innerHTML = `<pre>${data.Anotacao}</pre>`;
@@ -37,4 +47,9 @@ async function getData(){
         console.log(e);
     }
 
+}
+
+async function editNote(event, form){
+    event.preventDefault();
+    let tema = form.querySelector("input");
 }
