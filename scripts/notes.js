@@ -1,13 +1,22 @@
-import { Notes } from "./NotesClass.js";
+import { db } from "../firebase/config.js";
+import { collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
 window.onload = () => {
-    let noteList = [];
-    let storedNotes = JSON.parse(localStorage.getItem("notes"));
-    noteList = storedNotes.map(notes => new Notes(notes.tema, notes.name, notes.note));
-    let tema = document.getElementById("tema");
-    tema.innerHTML = "Tema: " + localStorage.getItem("temp") + "<br>";
-    for(let i = 1; i <= noteList.length; i++){
-        if(noteList[i -1].tema == localStorage.getItem("temp")){
+    getData();
+}
+
+async function getData(){
+    try{
+        const dataNotes = collection(db, "anotacao");
+        const specifyNote = query(dataNotes, where("Tema", "==", localStorage.getItem("temp")));
+        const specifyNoteSp = await getDocs(specifyNote);
+    
+        let tema = document.getElementById("tema");
+        tema.innerHTML = "Tema: " + localStorage.getItem("temp") + "<br>";
+    
+        specifyNoteSp.forEach(noteGeted => {
+            let data = noteGeted.data();
+
             let div = document.createElement("div");
             let nameNote = document.createElement("h2");
             let anotation = document.createElement("h2");
@@ -20,9 +29,12 @@ window.onload = () => {
             div.appendChild(nameNote);
             div.appendChild(anotation);
             div.appendChild(note);
-            nameNote.innerHTML = `Nome da anotação: ${noteList[i -1].name}`;
+            nameNote.innerHTML = `Nome da anotação: ${data.Nome}`;
             anotation.innerHTML = `<br>Anotação:`;
-            note.innerHTML = `<pre>${noteList[i -1].note}</pre>`;
-        }
+            note.innerHTML = `<pre>${data.Anotacao}</pre>`;
+        })
+    }catch(e){
+        console.log(e);
     }
+
 }

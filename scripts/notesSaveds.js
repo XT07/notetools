@@ -1,40 +1,25 @@
-import { Notes } from "./NotesClass.js";
-
-let noteList = [];
+import { db } from "../firebase/config.js";
+import { collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
 window.onload = () => {
-    let storedNotes = JSON.parse(localStorage.getItem("notes")) || [];
-    noteList = storedNotes.map(item => new Notes(item.tema, item.name, item.note));
-    let row = document.getElementById("nomeTema");
+    getSavedNotes();
+    filter();
 
-    noteList.reverse().forEach(note => {
-        let h2 = document.createElement("h2");
-        let div = document.createElement("div");
-        let btn = document.createElement("button");
-        let form = document.createElement("form");
-        let inputId = document.createElement("input");
-        form.setAttribute("onsubmit", "getNote(event, this)");
-        inputId.setAttribute("type", "hidden");
-        inputId.value = note.tema;
-        div.classList.add("rowTitle");
-        btn.classList.add("verTema");
-        btn.innerHTML = "Ver anotações";
-        row.appendChild(div);
-        div.appendChild(h2);
-        div.appendChild(form);
-        form.appendChild(btn);
-        form.appendChild(inputId);
+}
 
-        h2.innerHTML = note.tema;
-    })
-
+async function filter(){
+    const notesSavedDD = collection(db, "temas");
+    const notesGet = await getDocs(notesSavedDD);
     let filter = document.getElementById("filter");
-    noteList.reverse().forEach(note => {
+
+    notesGet.forEach(notes => {
+        const data = notes.data();
+
         let option = document.createElement("option");
         filter.appendChild(option);
-        option.value = note.tema;
-        option.innerHTML = note.tema;
-    })
+        option.value = data.Nome;
+        option.innerHTML = data.Nome;
+    });
 }
 
 function getNote(event, form){
@@ -44,28 +29,34 @@ function getNote(event, form){
     window.location.href = "note.html";
 }
 
-function filterNotes() {
-    let tema = document.getElementById("filter").value;
+async function getSavedNotes(){
     let row = document.getElementById("nomeTema");
+    const notesSavedDD = collection(db, "temas");
+    const notesGet = await getDocs(notesSavedDD);
 
-    row.innerHTML = "";
+    notesGet.forEach(notes => {
+        const data = notes.data();
 
-    let filteredNotes = noteList.filter(note => note.tema === tema);
-
-    filteredNotes.reverse().forEach(note => {
         let h2 = document.createElement("h2");
         let div = document.createElement("div");
         let btn = document.createElement("button");
+        let form = document.createElement("form");
+        let inputId = document.createElement("input");
+        form.setAttribute("onsubmit", "getNote(event, this)");
+        inputId.setAttribute("type", "hidden");
+        inputId.value = data.Nome;
         div.classList.add("rowTitle");
         btn.classList.add("verTema");
         btn.innerHTML = "Ver anotações";
         row.appendChild(div);
         div.appendChild(h2);
-        div.appendChild(btn);
+        div.appendChild(form);
+        form.appendChild(btn);
+        form.appendChild(inputId);
 
-        h2.innerHTML = note.tema;
-    });
+        h2.innerHTML = data.Nome;
+    })
+
 }
 
 window.getNote = getNote;
-window.filterNotes = filterNotes; 

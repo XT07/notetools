@@ -1,23 +1,30 @@
-import { Notes } from "./NotesClass.js";
+import { db } from "../firebase/config.js";
+import { collection, addDoc, getDocs, where, query } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-let noteList = [];
-let notes;
-
-window.onload = () => {
-    let storedNotes = JSON.parse(localStorage.getItem("notes")) || [];
-    noteList = storedNotes.map(item => new Notes(item.tema, item.name, item.note));
-}
-
-function createNote(){
+async function createNote(){
     let tema = document.getElementById("tema").value;
     let nameNote = document.getElementById("nameNote").value;
     let note = document.getElementById("note").value;
 
-    notes = new Notes(tema, nameNote, note);
-    noteList.push(notes);
+    try {
+        const temaVerif = collection(db, "temas");
+        const temaQuery = query(temaVerif, where("Nome", "==", tema));
+        const temaVerified = await getDocs(temaQuery);
 
-    alert("Anotação salva com sucesso");
-    localStorage.setItem("notes", JSON.stringify(noteList));
+        if(temaVerified.empty){
+            const docTema = await addDoc(collection(db, "temas"), {
+                Nome: tema
+            });
+        }
+
+        const docNote = await addDoc(collection(db, "anotacao"), {
+            Tema: tema,
+            Nome: nameNote,
+            Anotacao: note
+        });
+    }catch(e){
+        console.log(`Não foi possivel adicionar os dados na tabela erro | ${e}`);
+    };
 };
 
 window.createNote = createNote;
