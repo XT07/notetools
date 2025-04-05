@@ -1,5 +1,5 @@
 import { db } from "../firebase/config.js";
-import { collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+import { collection, query, where, getDocs, deleteDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
 window.onload = () => {
     getData();
@@ -25,20 +25,30 @@ async function getData(){
             let divForm = document.createElement("div");
             let btn = document.createElement("button");
             let btnDel = document.createElement("button");
+            let formEdit = document.createElement("form");
+            let formDelet = document.createElement("form");
+            let noteNameDom = document.createElement("input");
             nameNote.classList.add("nameNotes");
             anotation.classList.add("nameNotes");
             divForm.classList.add("divForm");
             btn.classList.add("btnEdit");
+            btnDel.classList.add("btnDel");
             div.setAttribute("id", "divTema");
-            divForm.setAttribute("onsubmit", "editNote(event, this)");
+            noteNameDom.setAttribute("type", "hidden");
+            formEdit.setAttribute("onsubmit", "editNote(event, this)");
+            formDelet.setAttribute("onsubmit", "delNote(event, this)");
             notesLast.appendChild(div);
             div.appendChild(nameNote);
             div.appendChild(anotation);
             div.appendChild(note);
             div.appendChild(divForm);
-            divForm.appendChild(btn);
-            divForm.appendChild(btnDel);
+            divForm.appendChild(formEdit);
+            divForm.appendChild(formDelet);
+            formEdit.appendChild(btn);
+            formDelet.appendChild(btnDel);
+            noteNameDom.value = data.Nome;
             btn.innerHTML = "Editar";
+            btnDel.innerHTML = "Deletar";
             nameNote.innerHTML = `Nome da anotação: ${data.Nome}`;
             anotation.innerHTML = `<br>Anotação:`;
             note.innerHTML = `<pre>${data.Anotacao}</pre>`;
@@ -51,5 +61,29 @@ async function getData(){
 
 async function editNote(event, form){
     event.preventDefault();
-    let tema = form.querySelector("input");
+    let nameNote = form.querySelector("input");
 }
+
+async function delNote(event, form){
+    let confirmation = confirm("ATENÇÃO ! Você está prestes a deletar uma anotação, tem certeza que quer continuar ?");
+    event.preventDefault();
+    let nameNote = form.querySelector("input");
+    if(confirmation){
+        try{
+            let note = collection(db, "anotacao");
+            let noteQuery = query(note, where("Nome", "==", nameNote));
+            let noteDoc = await getDocs(noteQuery);
+            //gpt começa aqui
+            noteDoc.forEach(async (doc) => {
+                await deleteDoc(doc.ref);
+            });
+            //gpt termina aqui
+            window.location.reload();
+        }catch(e){
+            console.log(e);
+        }
+    }
+}
+
+window.editNote = editNote;
+window.delNote = delNote;
