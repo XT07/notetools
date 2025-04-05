@@ -25,7 +25,8 @@ async function filter(){
 function getNote(event, form){
     event.preventDefault();
     let tema = form.querySelector("input").value;
-    localStorage.setItem("temp", tema);
+    let tempTema = tema.toUpperCase();
+    localStorage.setItem("temp", tempTema);
     window.location.href = "note.html";
 }
 

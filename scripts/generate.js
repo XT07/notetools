@@ -11,17 +11,21 @@ async function createNote(){
         const temaQuery = query(temaVerif, where("Nome", "==", tema));
         const temaVerified = await getDocs(temaQuery);
 
+        let tempTema =  tema.toUpperCase();
+
         if(temaVerified.empty){
             const docTema = await addDoc(collection(db, "temas"), {
-                Nome: tema
+                Nome: tempTema
             });
         }
 
         const docNote = await addDoc(collection(db, "anotacao"), {
-            Tema: tema,
+            Tema: tempTema,
             Nome: nameNote,
             Anotacao: note
         });
+
+        window.location.href = "index.html";
     }catch(e){
         console.log(`Não foi possivel adicionar os dados na tabela erro | ${e}`);
     };
