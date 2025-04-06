@@ -1,5 +1,5 @@
 import { db } from "../firebase/config.js";
-import { collection, query, where, getDocs, deleteDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+import { collection, query, where, getDocs, deleteDoc, updateDoc, doc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
 window.onload = () => {
     getData();
@@ -45,7 +45,9 @@ async function getData(){
             divForm.appendChild(formEdit);
             divForm.appendChild(formDelet);
             formEdit.appendChild(btn);
+            formEdit.appendChild(noteNameDom);
             formDelet.appendChild(btnDel);
+            formDelet.appendChild(noteNameDom);
             noteNameDom.value = data.Nome;
             btn.innerHTML = "Editar";
             btnDel.innerHTML = "Deletar";
@@ -61,24 +63,33 @@ async function getData(){
 
 async function editNote(event, form){
     event.preventDefault();
-    let nameNote = form.querySelector("input");
+    let nameNote = form.querySelector("input").value;
+    let noteUptDb = collection(db, "anotacao");
+    let noteUptQuery = query(noteUptDb, where("Nome", "==", nameNote));
+
+    let noteUptDoc = await getDocs(noteUptQuery);
+
+    noteUptDoc.forEach(async (note) => {
+        let id = doc(db, "anotacao", note.id);
+
+        await updateDoc(id, {
+            
+        })
+    })
 }
 
 async function delNote(event, form){
     let confirmation = confirm("ATENÇÃO ! Você está prestes a deletar uma anotação, tem certeza que quer continuar ?");
     event.preventDefault();
-    let nameNote = form.querySelector("input");
+    let nameNote = form.querySelector("input").value;
     if(confirmation){
         try{
             let note = collection(db, "anotacao");
             let noteQuery = query(note, where("Nome", "==", nameNote));
             let noteDoc = await getDocs(noteQuery);
-            //gpt começa aqui
             noteDoc.forEach(async (doc) => {
                 await deleteDoc(doc.ref);
             });
-            //gpt termina aqui
-            window.location.reload();
         }catch(e){
             console.log(e);
         }
