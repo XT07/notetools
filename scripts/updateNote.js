@@ -2,6 +2,10 @@ import { db } from "../firebase/config.js";
 import { updateDoc, query, where, doc, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
 window.onload = async () => {
+    if(localStorage.getItem("logado") == "false" || !localStorage.getItem("logado")){
+        window.location.href = "login.html";
+    }
+    
     let getStored = localStorage.getItem("tempNote");
     let noteUptDb = collection(db, "anotacao");
     let noteUptQuery = query(noteUptDb, where("Nome", "==", getStored));
@@ -49,4 +53,12 @@ async function update(){
     })
 }
 
+function logout(){
+    localStorage.setItem("logado", false);
+    localStorage.setItem("email", "");
+
+    window.location.href = "login.html";
+}
+
 window.update = update;
+window.logout = logout;

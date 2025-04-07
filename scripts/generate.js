@@ -1,6 +1,12 @@
 import { db } from "../firebase/config.js";
 import { collection, addDoc, getDocs, where, query } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
+window.onload = () => {
+    if(localStorage.getItem("logado") == "false" || !localStorage.getItem("logado")){
+        window.location.href = "login.html";
+    }
+}
+
 async function createNote(){
     let tema = document.getElementById("tema").value;
     let nameNote = document.getElementById("nameNote").value;
@@ -31,4 +37,12 @@ async function createNote(){
     };
 };
 
+function logout(){
+    localStorage.setItem("logado", false);
+    localStorage.setItem("email", "");
+
+    window.location.href = "login.html";
+}
+
 window.createNote = createNote;
+window.logout = logout;

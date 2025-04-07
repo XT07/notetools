@@ -86,7 +86,15 @@ async function cadastrar(event, form){
 
 }
 
+function logout(){
+    localStorage.setItem("logado", false);
+    localStorage.setItem("email", "");
+
+    window.location.href = "login.html";
+}
+
 window.irCadastro = irCadastro;
 window.irLogin = irLogin;
 window.login = login;
 window.cadastrar = cadastrar;
+window.logout = logout;

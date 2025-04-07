@@ -2,9 +2,12 @@ import { db } from "../firebase/config.js";
 import { collection, query, where, getDocs, updateDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
 window.onload = () => {
+    if(localStorage.getItem("logado") == "false" || !localStorage.getItem("logado")){
+        window.location.href = "login.html";
+    }
+
     getSavedNotes();
     filter();
-
 }
 
 async function filter(){
@@ -85,6 +88,14 @@ async function delTema(event, form){
     let temaDocDb = aollection(db, "temas");
 }
 
+function logout(){
+    localStorage.setItem("logado", false);
+    localStorage.setItem("email", "");
+
+    window.location.href = "login.html";
+}
+
 window.getNote = getNote;
 window.delTema = delTema;
 window.editTema = editTema;
+window.logout = logout;

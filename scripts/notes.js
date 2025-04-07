@@ -2,6 +2,10 @@ import { db } from "../firebase/config.js";
 import { collection, query, where, getDocs, deleteDoc, } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
 window.onload = () => {
+    if(localStorage.getItem("logado") == "false" || !localStorage.getItem("logado")){
+        window.location.href = "login.html";
+    }
+    
     getData();
 }
 
@@ -90,5 +94,13 @@ async function delNote(event, form){
     }
 }
 
+function logout(){
+    localStorage.setItem("logado", false);
+    localStorage.setItem("email", "");
+
+    window.location.href = "login.html";
+}
+
 window.editNote = editNote;
 window.delNote = delNote;
+window.logout = logout;

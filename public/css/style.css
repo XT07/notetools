@@ -343,3 +343,13 @@ pre {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: 20px;
 }
+
+.btnMenu {
+    background: none;
+    font-size: 20px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: #ffffff;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
