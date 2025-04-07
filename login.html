@@ -18,19 +18,21 @@
             </ul>
         </div>
     </nav>
-    <div class="create">
-        <div class="newNotes">
-            <h2>Editar anotação</h2><br>
-            <label>Nome do tema (max 50 carcteres): </label><br>
-            <input type="text" id="tema" placeholder="Ex: matemática" maxlength="50" class="textNotes"><br><br>
-            <label>Nome da anotação (max 50 carcteres):</label><br>
-            <input type="text" id="nameNote" placeholder="Ex: baskara" maxlength="50" class="textNotes"><br><br>
-            <label>Anotação:</label><br><br>
-            <textarea id="note"></textarea><br><br>
-            <button onclick="update()" class="save">Salvar</button>
-        </div>
+    <div class="nameNotesForm">
+        <form>
+            <h2>Login</h2>
+            <label for="user">CPF/User:</label><br>
+            <input id="user" type="text" class="textNotes" placeholder="Nome de usuário ou CPF" required><br><br>
+            <label for="email">E-mail:</label><br>
+            <input id="email" type="email" class="textNotes" placeholder="Insira um e-mail válido" required><br><br>
+            <div style="display: flex; gap: 10px;">
+                <button onclick="login(event, this)" class="btnEdit">Login</button>
+                <button onclick="irCadastro(event)" class="btnEdit">Cadastrar-se</button>
+            </div>
+        </form>
     </div>
     <script type="module" src="./firebase/config.js"></script>
-    <script type="module" src="./scripts/updateNote.js"></script>
+    <script src="./scripts/ciente.js"></script>
+    <script type="module" src="./scripts/login.js"></script>
 </body>
 </html>

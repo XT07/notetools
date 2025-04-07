@@ -28,6 +28,7 @@ async function getData(){
             let formEdit = document.createElement("form");
             let formDelet = document.createElement("form");
             let noteNameDom = document.createElement("input");
+            let noteNameDomDelet = document.createElement("input");
             nameNote.classList.add("nameNotes");
             anotation.classList.add("nameNotes");
             divForm.classList.add("divForm");
@@ -35,6 +36,7 @@ async function getData(){
             btnDel.classList.add("btnDel");
             div.setAttribute("id", "divTema");
             noteNameDom.setAttribute("type", "hidden");
+            noteNameDomDelet.setAttribute("type", "hidden");
             formEdit.setAttribute("onsubmit", "editNote(event, this)");
             formDelet.setAttribute("onsubmit", "delNote(event, this)");
             notesLast.appendChild(div);
@@ -47,8 +49,9 @@ async function getData(){
             formEdit.appendChild(btn);
             formEdit.appendChild(noteNameDom);
             formDelet.appendChild(btnDel);
-            formDelet.appendChild(noteNameDom);
+            formDelet.appendChild(noteNameDomDelet);
             noteNameDom.value = data.Nome;
+            noteNameDomDelet.value = data.Nome;
             btn.innerHTML = "Editar";
             btnDel.innerHTML = "Deletar";
             nameNote.innerHTML = `Nome da anotação: ${data.Nome}`;
@@ -64,18 +67,9 @@ async function getData(){
 async function editNote(event, form){
     event.preventDefault();
     let nameNote = form.querySelector("input").value;
-    let noteUptDb = collection(db, "anotacao");
-    let noteUptQuery = query(noteUptDb, where("Nome", "==", nameNote));
+    localStorage.setItem("tempNote", nameNote);
 
-    let noteUptDoc = await getDocs(noteUptQuery);
-
-    noteUptDoc.forEach(async (note) => {
-        let id = doc(db, "anotacao", note.id);
-
-        await updateDoc(id, {
-            
-        })
-    })
+    window.location.href = "update.html";
 }
 
 async function delNote(event, form){

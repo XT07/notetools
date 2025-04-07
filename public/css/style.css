@@ -323,3 +323,18 @@ pre {
     background-color: #FF0000;
     color: #ffffff;
 }
+
+.login {
+    padding: 50px 50px 50px 50px;
+}
+
+.nameNotesForm {
+    margin-top: 20px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 25px;
+    margin: 0 auto;
+    border: 2px solid #ffffff;
+    border-radius: 15px;
+    padding: 20px 20px 20px 20px;
+    width: 50%;
+}
