@@ -1,5 +1,5 @@
 import { db } from "../firebase/config.js";
-import { collection, addDoc, getDocs, query, where } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+import { collection, addDoc, getDocs, query, where, doc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
 function irLogin(event){
     event.preventDefault();
@@ -29,10 +29,12 @@ async function login(event, form){
                 let dataEmail= login.data();
                 let dataLogin = user.data();
 
-                if(dataLogin.Login === loginReplaced && dataEmail.Email === email){
-                    localStorage.setItem("logado", true);
-                    localStorage.setItem("email", email);
-                    window.location.href = "index.html";
+                if(login.id === user.id){
+                    if(dataLogin.Login === loginReplaced && dataEmail.Email === email){
+                        localStorage.setItem("logado", true);
+                        localStorage.setItem("email", email);
+                        window.location.href = "index.html";
+                    }
                 }else{
                     alert("CPF/usuário e/ou email inválidos");
                 }
@@ -44,6 +46,7 @@ async function login(event, form){
 }
 
 async function cadastrar(event, form){
+    event.preventDefault();
     let login = document.getElementById("user").value;
     let loginReplaced = login.replace(/[-."']/g, "");
     let email = document.getElementById("email").value;
@@ -51,32 +54,47 @@ async function cadastrar(event, form){
     let attTermos = document.getElementById("attTermos").checked;
     let alerta = document.getElementById("alerta");
 
-    if(termos){
-        event.preventDefault();
-        if(login.trim() === "" || email.trim() === ""){
-            alert("Coloque um user/CPF e um email válido");
-        }else{
-            try{
-                if(attTermos){
-                    let addUser = await addDoc(collection(db, "users"), {
-                        Login: loginReplaced,
-                        Email: email,
-                        Att: attTermos,
-                        termos: true
-                    });
-                }else{
-                    let addUser = await addDoc(collection(db, "users"), {
-                        Login: loginReplaced,
-                        Email: email,
-                        Att: attTermos,
-                        termos: true
-                    });
-                }
-            }catch(e){
-                console.log(e);
-            }
+    let dbData = collection(db, "users");
+    let dbQueryUser = query(dbData, where("Login", "==", loginReplaced));
+    let dbQueryEmail = query(dbData, where("Email", "==", email));
+    let confUser = await getDocs(dbQueryUser);
+    let confEmail = await getDocs(dbQueryEmail);
 
-            window.location.href = "login.html";
+    if(termos){
+        if(!confUser.empty){
+            alert("Usuário/CPF já cadastrado");
+        }
+
+        if(!confEmail.empty){
+            alert("E-mail já cadastrado");
+        }
+
+        if(confUser.empty && confEmail.empty){
+            if(login.trim() === "" || email.trim() === ""){
+                alert("Coloque um user/CPF e um email válido");
+            }else{
+                try{
+                    if(attTermos){
+                        let addUser = await addDoc(collection(db, "users"), {
+                            Login: loginReplaced,
+                            Email: email,
+                            Att: attTermos,
+                            termos: true
+                        });
+                    }else{
+                        let addUser = await addDoc(collection(db, "users"), {
+                            Login: loginReplaced,
+                            Email: email,
+                            Att: attTermos,
+                            termos: true
+                        });
+                    }
+                }catch(e){
+                    console.log(e);
+                }
+    
+                window.location.href = "login.html";
+            }
         }
     }else{
         event.preventDefault();

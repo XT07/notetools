@@ -85,7 +85,7 @@ async function getSavedNotes(){
 }
 
 async function delTema(event, form){
-    let temaDocDb = aollection(db, "temas");
+    let temaDocDb = collection(db, "temas");
 }
 
 function logout(){
@@ -97,5 +97,5 @@ function logout(){
 
 window.getNote = getNote;
 window.delTema = delTema;
-window.editTema = editTema;
+//window.editTema = editTema;
 window.logout = logout;
