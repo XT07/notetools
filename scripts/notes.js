@@ -1,5 +1,5 @@
 import { db } from "../firebase/config.js";
-import { collection, query, where, getDocs, deleteDoc, updateDoc, doc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+import { collection, query, where, getDocs, deleteDoc, } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
 window.onload = () => {
     getData();

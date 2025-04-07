@@ -329,7 +329,6 @@ pre {
 }
 
 .nameNotesForm {
-    margin-top: 20px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: 25px;
     margin: 0 auto;
@@ -337,4 +336,10 @@ pre {
     border-radius: 15px;
     padding: 20px 20px 20px 20px;
     width: 50%;
+}
+
+.alert {
+    color: #FF0000;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 20px;
 }
