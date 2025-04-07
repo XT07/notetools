@@ -12,7 +12,35 @@ function irCadastro(event){
 }
 
 async function login(event, form){
+    event.preventDefault();
+    let login = document.getElementById("user").value;
+    let loginReplaced = login.replace(/[-."']/g, "");
+    let email = document.getElementById("email").value;
+    let loginDb = collection(db, "users");
+    let loginQuery = query(loginDb, where("Email", "==", email));
+    let userQuery = query(loginDb, where("Login", "==", loginReplaced));
 
+    try{
+        let loginOk = await getDocs(loginQuery);
+        let userOk = await getDocs(userQuery);
+        
+        loginOk.forEach(login => {
+            userOk.forEach(user => {
+                let dataEmail= login.data();
+                let dataLogin = user.data();
+
+                if(dataLogin.Login === loginReplaced && dataEmail.Email === email){
+                    localStorage.setItem("logado", true);
+                    localStorage.setItem("email", email);
+                    window.location.href = "index.html";
+                }else{
+                    alert("CPF/usuário e/ou email inválidos");
+                }
+            })
+        })
+    }catch(e){
+        console.log(e);
+    }
 }
 
 async function cadastrar(event, form){
