@@ -27,9 +27,15 @@ window.onload = async () => {
 }
 
 async function update(){
+    let idDocs = collection(db, "users");
+    let idQuery = query(idDocs, where("Email", "==", localStorage.getItem("email")));
+    let idDoc = await getDocs(idQuery);
+    let idDocc = idDoc.docs[0];
+    let id = idDocc.id;
     let getStored = localStorage.getItem("tempNote");
     let noteUptDb = collection(db, "anotacao");
-    let noteUptQuery = query(noteUptDb, where("Nome", "==", getStored));
+    let noteUptQuery = query(noteUptDb, where("Nome", "==", getStored),
+    where("idUser", "==", id));
 
     let noteUptDoc = await getDocs(noteUptQuery);
 
@@ -38,10 +44,8 @@ async function update(){
     let note = document.getElementById("note");
 
     noteUptDoc.forEach(async (notes) => {
-        alert("estou aqui");
         try{
             let id = doc(db, "anotacao", notes.id);
-            alert("estou aaaaqui");
             await updateDoc(id, {
                 Nome: nameNoteForm.value,
                 Anotacao: note.value,
@@ -50,6 +54,8 @@ async function update(){
         }catch(e){
             console.log(e);
         }
+
+        window.location.href = "note.html";
     })
 }
 

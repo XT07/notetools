@@ -1,5 +1,5 @@
 import { db } from "../firebase/config.js";
-import { collection, query, where, getDocs, updateDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+import { collection, query, where, getDocs, updateDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
 window.onload = () => {
     if(localStorage.getItem("logado") == "false" || !localStorage.getItem("logado")){
@@ -11,8 +11,15 @@ window.onload = () => {
 }
 
 async function filter(){
+    const getId = collection(db, "users");
+    const getedId = query(getId, where("Email", "==", localStorage.getItem("email")));
+    const docsId = await getDocs(getedId);
+    let idDoc = docsId.docs[0];
+    let id = idDoc.id;
     const notesSavedDD = collection(db, "temas");
-    const notesGet = await getDocs(notesSavedDD);
+    const noteQuery = query(notesSavedDD, where("idUser", "==", id));
+
+    const notesGet = await getDocs(noteQuery);
     let filter = document.getElementById("filter");
 
     notesGet.forEach(notes => {
@@ -34,9 +41,15 @@ function getNote(event, form){
 }
 
 async function getSavedNotes(){
+    const getId = collection(db, "users");
+    const getedId = query(getId, where("Email", "==", localStorage.getItem("email")));
+    const docsId = await getDocs(getedId);
+    let idUser = docsId.docs[0];
+    let id = idUser.id;
     let row = document.getElementById("nomeTema");
     const notesSavedDD = collection(db, "temas");
-    const notesGet = await getDocs(notesSavedDD);
+    const noteQuery = query(notesSavedDD, where("idUser", "==", id));
+    const notesGet = await getDocs(noteQuery);
 
     notesGet.forEach(notes => {
         const data = notes.data();
@@ -85,7 +98,33 @@ async function getSavedNotes(){
 }
 
 async function delTema(event, form){
-    let temaDocDb = collection(db, "temas");
+    event.preventDefault();
+    let confirmation = confirm("ATENÇÃO! ao deletar esse tema você perderá o acesso a todas as suas anotações vinculadas a esse tema, quer continuar ?")
+    if(confirmation){
+        try{
+            const idDocs = collection(db, "users");
+            const idQuery = query(idDocs, where("Email", "==", localStorage.getItem("email")));
+            const idDocsGeted = await getDocs(idQuery);
+            let idGeted = idDocsGeted.docs[0];
+            let id = idGeted.id;
+            let tema = document.querySelector("input").value;
+            let temaDocDb = collection(db, "temas");
+            let temaQuery = query(temaDocDb, where("Nome", "==", tema),
+            where("idUser", "==", id));
+        
+            let temaDoc = await getDocs(temaQuery);
+        
+            temaDoc.forEach(async doc => {
+                await deleteDoc(doc.ref);
+            })
+        
+            setTimeout(() => {
+                window.location.reload();
+            }, 1000);
+        }catch(e){
+            console.log(e);
+        }
+    }
 }
 
 function logout(){

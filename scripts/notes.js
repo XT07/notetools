@@ -11,8 +11,14 @@ window.onload = () => {
 
 async function getData(){
     try{
+        const idDocs = collection(db, "users");
+        const idQuery = query(idDocs, where("Email", "==", localStorage.getItem("email")));
+        const idDocsGeted = await getDocs(idQuery);
+        let idGeted = idDocsGeted.docs[0];
+        let id = idGeted.id;
         const dataNotes = collection(db, "anotacao");
-        const specifyNote = query(dataNotes, where("Tema", "==", localStorage.getItem("temp")));
+        const specifyNote = query(dataNotes, where("Tema", "==", localStorage.getItem("temp")),
+        where("idUser", "==", id));
         const specifyNoteSp = await getDocs(specifyNote);
     
         let tema = document.getElementById("tema");
@@ -82,12 +88,23 @@ async function delNote(event, form){
     let nameNote = form.querySelector("input").value;
     if(confirmation){
         try{
+            const idDocs = collection(db, "users");
+            const idQuery = query(idDocs, where("Email", "==", localStorage.getItem("email")));
+            const idDocsGeted = await getDocs(idQuery);
+            let idGeted = idDocsGeted.docs[0];
+            let id = idGeted.id;
             let note = collection(db, "anotacao");
-            let noteQuery = query(note, where("Nome", "==", nameNote));
+            let noteQuery = query(note, where("Nome", "==", nameNote),
+            where("idUser", "==", id));
             let noteDoc = await getDocs(noteQuery);
+            
             noteDoc.forEach(async (doc) => {
                 await deleteDoc(doc.ref);
             });
+
+            setTimeout(() => {
+                window.location.reload();
+            }, 1000);
         }catch(e){
             console.log(e);
         }
