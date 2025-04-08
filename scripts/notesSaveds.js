@@ -94,7 +94,6 @@ async function getSavedNotes(){
         inputIdTemaDel.value = data.Nome;
         h2.innerHTML = data.Nome;
     })
-
 }
 
 async function delTema(event, form){
@@ -134,7 +133,12 @@ function logout(){
     window.location.href = "login.html";
 }
 
+async function editTema(event, form){
+    event.preventDefault();
+    window.location.href = "updateTema.html";
+}
+
 window.getNote = getNote;
 window.delTema = delTema;
-//window.editTema = editTema;
+window.editTema = editTema;
 window.logout = logout;
