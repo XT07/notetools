@@ -142,3 +142,4 @@ window.getNote = getNote;
 window.delTema = delTema;
 window.editTema = editTema;
 window.logout = logout;
+window.filterNotes = filterNotes;
