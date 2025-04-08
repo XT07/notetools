@@ -11,7 +11,6 @@ async function saveEditTema(event, form){
     let temaUpper = temaNew.toUpperCase();
     let tema = localStorage.getItem("temp");
     let temaOldUpper = tema.toUpperCase();
-    console.log(temaOldUpper);
     let temaDocDb = collection(db, "temas");
     let temaQuery = query(temaDocDb, where("Nome", "==", temaOldUpper),
     where("idUser", "==", id));
@@ -30,6 +29,7 @@ async function saveEditTema(event, form){
                 Nome: temaUpper
             })
         })
+
         note.forEach(async noteId => {
             let id = doc(db, "anotacao", noteId.id);
     

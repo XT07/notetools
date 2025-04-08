@@ -135,7 +135,78 @@ function logout(){
 
 async function editTema(event, form){
     event.preventDefault();
+    let tema = form.querySelector("input").value;
+    localStorage.setItem("temp", tema);
     window.location.href = "updateTema.html";
+}
+
+async function filterNotes(){
+    let filter = document.getElementById("filter").value;
+    
+    const getId = collection(db, "users");
+    const getedId = query(getId, where("Email", "==", localStorage.getItem("email")));
+    const docsId = await getDocs(getedId);
+    let idUser = docsId.docs[0];
+    let id = idUser.id;
+    let row = document.getElementById("nomeTema");
+    const notesSavedDD = collection(db, "temas");
+    const noteQuery = query(notesSavedDD, where("idUser", "==", id),
+    where("Nome", "==", filter));
+    const notesGet = await getDocs(noteQuery);
+
+    if(filter.trim() != ""){
+        notesGet.forEach(notes => {
+            const data = notes.data();
+    
+            let h2 = document.createElement("h2");
+            let div = document.createElement("div");
+            let btn = document.createElement("button");
+            let form = document.createElement("form");
+            let inputId = document.createElement("input");
+            let inputIdTema = document.createElement("input");
+            let inputIdTemaDel = document.createElement("input");
+            let btnDel = document.createElement("button");
+            let btnEdit = document.createElement("button");
+            let formDel = document.createElement("form");
+            let formEdit = document.createElement("form");
+            row.innerHTML = "";
+            form.setAttribute("onsubmit", "getNote(event, this)");
+            inputId.setAttribute("type", "hidden");
+            inputIdTema.setAttribute("type", "hidden");
+            inputIdTemaDel.setAttribute("type", "hidden");
+            formDel.setAttribute("onsubmit", "delTema(event, this)");
+            formEdit.setAttribute("onsubmit", "editTema(event, this)");
+            div.classList.add("rowTitle");
+            btn.classList.add("verTema");
+            btnDel.classList.add("btnDelTema");
+            btnEdit.classList.add("btnEditTema");
+            row.appendChild(div);
+            div.appendChild(h2);
+            div.appendChild(form);
+            div.appendChild(formDel);
+            div.appendChild(formEdit);
+            formDel.appendChild(btnDel);
+            formEdit.appendChild(btnEdit);
+            formDel.appendChild(inputIdTemaDel);
+            formEdit.appendChild(inputIdTema);
+            form.appendChild(btn);
+            form.appendChild(inputId);
+            btnDel.innerHTML = "Deletar";
+            btnEdit.innerHTML = "Editar";
+            btn.innerHTML = "Ver anotações";
+            inputId.value = "";
+            inputIdTema.value = "";
+            inputIdTemaDel.value = "";
+            h2.innerHTML = "";
+            inputId.value = data.Nome;
+            inputIdTema.value = data.Nome;
+            inputIdTemaDel.value = data.Nome;
+            h2.innerHTML = data.Nome;
+        })
+    }else{
+        row.innerHTML = "";
+        getSavedNotes();
+    }
 }
 
 window.getNote = getNote;
