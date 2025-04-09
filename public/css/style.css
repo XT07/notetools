@@ -378,22 +378,42 @@ pre {
     transition: 0.3s ease;
 }
 
+.bg {
+    background-color: #001020;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    z-index: 98;
+    top: 0;
+    left: 0;
+    display: none;
+}
+
 @media(max-width: 1700px){
-    .bg {
-        background-color: #001020;
-        width: 100vw;
-        height: 100vh;
-        position: fixed;
-        z-index: 99;
+    body {
         overflow: hidden;
+    }
+
+    .menuBox {
+        height: 25px;
     }
 
     .menu {
         display: none;
         flex-direction: column;
-        position: absolute;
-        right: 0;
-        margin-top: 30px;
+        align-items: center;
+        justify-content: center;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: 99;
+        gap: 20px;
+    }
+
+    #menu-toggle:checked ~ .bg {
+        display: block;
     }
 
     #menu-toggle:checked ~ .menu {
@@ -405,16 +425,20 @@ pre {
         position: absolute;
         top: 25px;
         right: 20px;
+        z-index: 100;
     }
 
     .menuContent {
+        display: flex;
         flex-direction: column;
         align-items: center;
+        gap: 20px;
         padding: 0;
+        list-style: none;
     }
 
     .menuItem {
-        padding: 10px 0;
+        font-size: 30px;
     }
 
     .btnEdit {
