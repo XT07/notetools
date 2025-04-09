@@ -390,12 +390,12 @@ pre {
 }
 
 @media(max-width: 1700px){
-    body {
-        overflow: hidden;
-    }
-
     .menuBox {
         height: 25px;
+    }
+
+    .menu-open {
+        overflow: hidden;
     }
 
     .menu {
@@ -448,6 +448,7 @@ pre {
     .rowTitle {
         display: flex;
         flex-direction: column;
+        padding-bottom: 0;
     }
 
     .last h2 {
