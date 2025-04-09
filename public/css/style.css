@@ -542,4 +542,8 @@ pre {
     .menuBox, .title, #menu-toggle, .hamburger {
         position: fixed;
     }
+
+    .nameNotesForm {
+        margin-top: 50px;
+    }
 }

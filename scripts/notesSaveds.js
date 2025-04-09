@@ -106,7 +106,7 @@ async function delTema(event, form){
             const idDocsGeted = await getDocs(idQuery);
             let idGeted = idDocsGeted.docs[0];
             let id = idGeted.id;
-            let tema = document.querySelector("input").value;
+            let tema = form.querySelector("input").value;
             let temaDocDb = collection(db, "temas");
             let temaQuery = query(temaDocDb, where("Nome", "==", tema),
             where("idUser", "==", id));
