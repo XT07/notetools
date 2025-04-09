@@ -436,6 +436,8 @@ pre {
         top: 25px;
         right: 20px;
         z-index: 100;
+        transition: 0.1s ease-in-out;
+        transform-origin: center;
     }
 
     .menuContent {
@@ -545,5 +547,17 @@ pre {
 
     .nameNotesForm {
         margin-top: 50px;
+    }
+
+    #menu-toggle:checked + .hamburger span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 6.5px);
+    }
+    
+    #menu-toggle:checked + .hamburger span:nth-child(2) {
+        opacity: 0;
+    }
+    
+    #menu-toggle:checked + .hamburger span:nth-child(3) {
+        transform: rotate(-45deg) translate(6px, -7.5px);
     }
 }
