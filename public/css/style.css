@@ -393,6 +393,10 @@ pre {
     display: none;
 }
 
+.lastSeeNotes {
+    padding: 50px 50px 50px 50px;
+}
+
 @media(max-width: 1700px){
     .menuBox {
         height: 25px;
@@ -506,5 +510,21 @@ pre {
 
     .rowTitle {
         border-radius: 8px;
+    }
+
+    .create {
+        padding: 20px;
+    }
+
+    textarea {
+        width: 87%;
+    }
+
+    .btns {
+        padding-left: 20px;
+    }
+
+    .lastSeeNotes {
+        padding: 20px;
     }
 }
