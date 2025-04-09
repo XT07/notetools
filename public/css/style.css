@@ -456,10 +456,14 @@ pre {
     .rowTitle {
         display: flex;
         flex-direction: column;
+        align-items: stretch;
+        border-radius: 8px;
+        padding: 0;
     }
 
-    .rowTitle form {
-        bottom: 0;
+    .btnEditTema form {
+        margin: 0;
+        padding: 0;
     }
 
     .last h2 {
@@ -482,10 +486,10 @@ pre {
     .btnDelTema, .verTema {
         position: static;
         width: 100%;
-        height: auto;
         height: 50px;
         font-size: 20px;
-        bottom: 0;
+        margin: 0;
+        padding: 0;
     }
 
     .newNotes {
@@ -505,11 +509,7 @@ pre {
     }
 
     .lastIndex {
-        padding: 50px 50px 50px 50px;
-    }
-
-    .rowTitle {
-        border-radius: 8px;
+        padding: 20px 20px 20px 20px;
     }
 
     .create {
@@ -526,5 +526,9 @@ pre {
 
     .lastSeeNotes {
         padding: 20px;
+    }
+
+    #logout {
+        font-size: 25px;
     }
 }
