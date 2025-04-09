@@ -35,5 +35,16 @@
         </div>
     </div>
     <script type="module" src="./scripts/updateTema.js"></script>
+    <script>
+        let toggle = document.getElementById("menu-toggle");
+
+        toggle.addEventListener("change", function () {
+            if(this.checked){
+                document.body.classList.add("menu-open");
+            }else {
+                document.body.classList.remove('menu-open');
+            }
+        })
+    </script>
 </body>
 </html>

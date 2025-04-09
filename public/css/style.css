@@ -82,6 +82,10 @@ h1 a {
     padding: 50px 50px 50px 50px;
 }
 
+.lastIndex {
+    padding: 50px 50px 50px 50px;
+}
+
 .create {
     padding: 50px 50px 50px 50px;
     justify-content: center;
@@ -161,7 +165,7 @@ textarea {
 }
 
 .rowTitle {
-    margin: 20px 0px 20px 0px;
+    margin: 20px 0px 0px 0px;
     border: 2px solid #ffffff;
     font-size: 25px;
     display: flex;
@@ -305,7 +309,7 @@ pre {
 
 .btnDelTema {
     position: absolute;
-    right: 32%;
+    right: 32.7%;
     top: 50%;
     height: 76px;
     transform: translateY(-51%);
@@ -448,7 +452,10 @@ pre {
     .rowTitle {
         display: flex;
         flex-direction: column;
-        padding-bottom: 0;
+    }
+
+    .rowTitle form {
+        bottom: 0;
     }
 
     .last h2 {
@@ -474,5 +481,30 @@ pre {
         height: auto;
         height: 50px;
         font-size: 20px;
+        bottom: 0;
+    }
+
+    .newNotes {
+        width: 99%;
+    }
+
+    .last {
+        width: 100%;
+        padding: 50px 0px 0px 0px;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+    }
+
+    .nameNotesForm {
+        width: 80%;
+    }
+
+    .lastIndex {
+        padding: 50px 50px 50px 50px;
+    }
+
+    .rowTitle {
+        border-radius: 8px;
     }
 }

@@ -25,21 +25,25 @@ async function createNote(){
 
         let tempTema =  tema.toUpperCase();
 
-        if(temaVerified.empty){
-            const docTema = await addDoc(collection(db, "temas"), {
-                Nome: tempTema,
+        if(tema.trim() == "" || nameNote.trim() == "" || note.trim() == ""){
+            alert("Preencha todos os campos");
+        }else{
+            if(temaVerified.empty){
+                const docTema = await addDoc(collection(db, "temas"), {
+                    Nome: tempTema,
+                    idUser: docId
+                });
+            }
+    
+            const docNote = await addDoc(collection(db, "anotacao"), {
+                Tema: tempTema,
+                Nome: nameNote,
+                Anotacao: note,
                 idUser: docId
             });
+
+            window.location.href = "index.html";
         }
-
-        const docNote = await addDoc(collection(db, "anotacao"), {
-            Tema: tempTema,
-            Nome: nameNote,
-            Anotacao: note,
-            idUser: docId
-        });
-
-        window.location.href = "index.html";
     }catch(e){
         console.log(`Não foi possivel adicionar os dados na tabela erro | ${e}`);
     };
