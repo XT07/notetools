@@ -400,6 +400,8 @@ pre {
 @media(max-width: 1700px){
     .menuBox {
         height: 25px;
+        width: 100%;
+        z-index: 100;
     }
 
     .menu-open {
@@ -493,6 +495,7 @@ pre {
     }
 
     .newNotes {
+        margin-top: 70px;
         width: 99%;
     }
 
@@ -524,11 +527,19 @@ pre {
         padding-left: 20px;
     }
 
+    .btns a {
+        margin-top: 50px;
+    }
+
     .lastSeeNotes {
         padding: 20px;
     }
 
     #logout {
         font-size: 25px;
+    }
+
+    .menuBox, .title, #menu-toggle, .hamburger {
+        position: fixed;
     }
 }
